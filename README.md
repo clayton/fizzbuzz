@@ -1,4 +1,4 @@
-h2. FizzBuzz
+== FizzBuzz
 
 http://c2.com/cgi/wiki?FizzBuzzTest
 
