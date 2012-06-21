@@ -1,3 +1,5 @@
+package com.claytonlz.fizzbuzz;
+
 /**
  * Created with IntelliJ IDEA.
  * User: clayton
@@ -6,4 +8,8 @@
  * To change this template use File | Settings | File Templates.
  */
 public class FizzBuzz {
+
+    public String evaluate(int i) {
+        return "Fizz";
+    }
 }
