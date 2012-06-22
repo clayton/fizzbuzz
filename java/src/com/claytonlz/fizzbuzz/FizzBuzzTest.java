@@ -1,6 +1,11 @@
 package com.claytonlz.fizzbuzz;
 
-import static org.junit.Assert.assertEquals;
+import junit.framework.TestCase;
+import org.jmock.Expectations;
+import org.jmock.Mockery;
+import org.jmock.integration.junit4.JUnit4Mockery;
+import org.jmock.lib.legacy.ClassImposteriser;
+import org.junit.Test;
 
 /**
 * Created with IntelliJ IDEA.
@@ -9,14 +14,50 @@ import static org.junit.Assert.assertEquals;
 * Time: 11:27 AM
 * To change this template use File | Settings | File Templates.
 */
-public class FizzBuzzTest {
+public class FizzBuzzTest extends TestCase{
     protected FizzBuzz fizzBuzz;
+    Mockery context = new JUnit4Mockery() {{
+        setImposteriser(ClassImposteriser.INSTANCE);
+    }};
     @org.junit.Before
     public void setUp() throws Exception {
         fizzBuzz = new FizzBuzz();
     }
 
-    public void testNumberThreeAsFizz() throws Exception{
-        assertEquals(fizzBuzz.evaluate(3), "Buzz");
+    @Test
+    public void testEvaluate100Times() throws Exception{
+       final FizzBuzz fakeBuzz = context.mock(FizzBuzz.class);
+
+        context.checking(new Expectations() {{
+           oneOf(fakeBuzz).evaluate(10);
+       }});
+
+       fakeBuzz.run();
     }
+
+    @Test
+    public void testNumberThreeAsFizz() throws Exception{
+        assertEquals("Fizz", fizzBuzz.evaluate(3));
+    }
+
+    @Test
+    public void testMultiplesOfThreeAsFizz() throws Exception{
+        assertEquals("Fizz", fizzBuzz.evaluate(12));
+    }
+
+    @Test
+    public void testNumberFiveAsBuzz() throws Exception{
+        assertEquals("Buzz", fizzBuzz.evaluate(5));
+    }
+
+    @Test
+    public void testMultiplesOfFiveAsBuzz() throws Exception{
+        assertEquals("Buzz", fizzBuzz.evaluate(25));
+    }
+
+    @Test
+    public void testMultiplesOfThreeAndFiveAsFizzBuzz() throws Exception{
+        assertEquals("FizzBuzz", fizzBuzz.evaluate(15));
+    }
+
 }
