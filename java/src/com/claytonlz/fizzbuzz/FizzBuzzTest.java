@@ -16,23 +16,10 @@ import org.junit.Test;
 */
 public class FizzBuzzTest extends TestCase{
     protected FizzBuzz fizzBuzz;
-    Mockery context = new JUnit4Mockery() {{
-        setImposteriser(ClassImposteriser.INSTANCE);
-    }};
+
     @org.junit.Before
     public void setUp() throws Exception {
         fizzBuzz = new FizzBuzz();
-    }
-
-    @Test
-    public void testEvaluate100Times() throws Exception{
-       final FizzBuzz fakeBuzz = context.mock(FizzBuzz.class);
-
-        context.checking(new Expectations() {{
-           oneOf(fakeBuzz).evaluate(10);
-       }});
-
-       fakeBuzz.run();
     }
 
     @Test
